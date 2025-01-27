@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calories Burned Calculator</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calories Burned Calculator</h1>
+        <form method="POST" action="/">
+            <label for="activity">Activity:</label>
+            <input type="text" id="activity" name="activity" required>
+            
+            <label for="weight">Weight (lbs):</label>
+            <input type="number" id="weight" name="weight" placeholder="Optional">
+            
+            <label for="duration">Duration (minutes):</label>
+            <input type="number" id="duration" name="duration" placeholder="Optional">
+            
+            <button type="submit">Calculate</button>
+        </form>
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+        {% if result %}
+        <div class="results">
+            <h2>Results:</h2>
+            <ul>
+                {% for item in result %}
+                <li>
+                    <strong>{{ item.name }}</strong>: {{ item.total_calories }} calories burned in {{ item.duration_minutes }} minutes.
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
